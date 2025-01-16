@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { challengeFlags } from '../data/challengeFlags';
 import ScoreCard from '../components/ScoreCard';
+import { useUser } from "@clerk/clerk-react";
 
 interface Challenge {
   id: number;
@@ -67,6 +68,7 @@ interface UserScore {
 }
 
 export default function Compete() {
+  const { user } = useUser();
   const [selectedChallenge, setSelectedChallenge] = useState<Challenge | null>(null);
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [flag, setFlag] = useState('');
@@ -78,10 +80,19 @@ export default function Compete() {
   
   // Mock current user - In real app, this would come from auth context
   const [currentUser, setCurrentUser] = useState<UserScore>({
-    username: "currentPlayer",
+    username: user?.username || user?.firstName || user?.emailAddresses[0].emailAddress || "Anonymous",
     points: 0,
     solvedChallenges: []
   });
+
+  useEffect(() => {
+    if (user) {
+      setCurrentUser(prev => ({
+        ...prev,
+        username: user.username || user.firstName || user.emailAddresses[0].emailAddress || "Anonymous"
+      }));
+    }
+  }, [user]);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
