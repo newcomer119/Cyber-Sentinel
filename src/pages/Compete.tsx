@@ -146,7 +146,7 @@ export default function Compete() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
-      <h1 className="text-3xl font-bold text-cyber-black mb-6">CTF Challenges</h1>
+      <h1 className="text-3xl font-bold text-cyber-black mb-6">CTF Challenges </h1>
 
       <ScoreCard scores={scores} currentUser={currentUser} />
 
