@@ -19,7 +19,7 @@ const challenges: Challenge[] = [
     title: "Web Exploitation 101",
     description: "Find the hidden flag in the website's source code",
     points: 100,
-    link: "https://challenge1.example.com",
+    link: "http://titan.picoctf.net:59972/",
     timeLimit: 30,
     flag: challengeFlags.web_exploitation
   },
@@ -209,7 +209,7 @@ export default function Compete() {
                         id="flag"
                         value={flag}
                         onChange={(e) => setFlag(e.target.value)}
-                        placeholder="CTF{flag_here}"
+                        placeholder="cybersentinel{flag_here}"
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-cyber-blue focus:ring-cyber-blue"
                       />
                     </div>
