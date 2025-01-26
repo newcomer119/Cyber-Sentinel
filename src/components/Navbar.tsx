@@ -1,12 +1,23 @@
 import { useClerk, useUser } from '@clerk/clerk-react';
 import { Link } from 'react-router-dom';
 import { Shield, Home, Info, LogIn, LogOut, Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLeaderboard } from '../context/LeaderboardContext';
 
 export default function Navbar() {
   const { user, isSignedIn } = useUser();
   const { signOut } = useClerk();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { addUser } = useLeaderboard();
+
+  useEffect(() => {
+    console.log('User object:', user);
+    if (isSignedIn && user) {
+      const username = user.username || user.email || user.firstName || user.lastName;
+      console.log(`Adding user: ${username}`);
+      addUser(username);
+    }
+  }, [isSignedIn, user, addUser]);
 
   return (
     <nav className="bg-cyber-black text-white shadow-lg">

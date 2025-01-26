@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { challengeFlags } from '../data/challengeFlags';
 import ScoreCard from '../components/ScoreCard';
 import { useUser } from "@clerk/clerk-react";
+import { useLeaderboard } from '../context/LeaderboardContext';
 
 interface Challenge {
   id: number;
@@ -85,6 +86,8 @@ export default function Compete() {
     solvedChallenges: []
   });
 
+  const { updateUserScore } = useLeaderboard();
+
   useEffect(() => {
     if (user) {
       setCurrentUser(prev => ({
@@ -127,6 +130,7 @@ export default function Compete() {
           solvedChallenges: [...currentUser.solvedChallenges, selectedChallenge.id]
         };
         setCurrentUser(updatedUser);
+        updateUserScore(updatedUser.username, updatedUser.points, updatedUser.solvedChallenges);
         
         // Update scoreboard
         setScores(prev => {
