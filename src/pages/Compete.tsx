@@ -16,6 +16,8 @@ interface Challenge {
 const TOTAL_TIME = 3 * 60 * 60; // 3 hours in seconds
 const TIMER_KEY = 'ctf_timer_state';
 const TIMER_START_KEY = 'ctf_timer_start';
+const USER_SCORE_KEY = 'ctf_user_score';
+const ALL_SCORES_KEY = 'ctf_all_scores';
 
 interface TimerState {
   isActive: boolean;
@@ -125,6 +127,8 @@ export default function Compete() {
   const { user } = useUser();
   const [selectedChallenge, setSelectedChallenge] = useState<Challenge | null>(null);
   const [flag, setFlag] = useState('');
+  
+  // Initialize timer state with proper persistence
   const [timerState, setTimerState] = useState<TimerState>(() => {
     const savedState = localStorage.getItem(TIMER_KEY);
     if (savedState) {
@@ -146,28 +150,42 @@ export default function Compete() {
     };
   });
 
-  const [scores, setScores] = useState<UserScore[]>([
-    { username: "player1", points: 150, solvedChallenges: [1] },
-    { username: "player2", points: 300, solvedChallenges: [1, 2] },
-  ]);
-  
-  const [currentUser, setCurrentUser] = useState<UserScore>({
-    username: user?.username || user?.firstName || user?.emailAddresses[0].emailAddress || "Anonymous",
-    points: 0,
-    solvedChallenges: []
+  // Initialize scores with localStorage data
+  const [scores, setScores] = useState<UserScore[]>(() => {
+    const savedScores = localStorage.getItem(ALL_SCORES_KEY);
+    return savedScores ? JSON.parse(savedScores) : [
+      { username: "player1", points: 150, solvedChallenges: [1] },
+      { username: "player2", points: 300, solvedChallenges: [1, 2] },
+    ];
+  });
+
+  // Initialize current user score with localStorage data
+  const [currentUser, setCurrentUser] = useState<UserScore>(() => {
+    const savedUserScore = localStorage.getItem(USER_SCORE_KEY);
+    if (savedUserScore) {
+      return JSON.parse(savedUserScore);
+    }
+    return {
+      username: user?.username || user?.firstName || user?.emailAddresses[0].emailAddress || "Anonymous",
+      points: 0,
+      solvedChallenges: []
+    };
   });
 
   const { updateUserScore } = useLeaderboard();
 
+  // Update currentUser when user data changes
   useEffect(() => {
     if (user) {
+      const username = user.username || user.firstName || user.emailAddresses[0].emailAddress || "Anonymous";
       setCurrentUser(prev => ({
         ...prev,
-        username: user.username || user.firstName || user.emailAddresses[0].emailAddress || "Anonymous"
+        username: username
       }));
     }
   }, [user]);
 
+  // Persist timer state
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (timerState.isActive && timerState.remainingTime > 0) {
@@ -185,6 +203,16 @@ export default function Compete() {
     }
     return () => clearInterval(timer);
   }, [timerState.isActive]);
+
+  // Persist scores whenever they change
+  useEffect(() => {
+    localStorage.setItem(ALL_SCORES_KEY, JSON.stringify(scores));
+  }, [scores]);
+
+  // Persist current user score whenever it changes
+  useEffect(() => {
+    localStorage.setItem(USER_SCORE_KEY, JSON.stringify(currentUser));
+  }, [currentUser]);
 
   const formatTime = (seconds: number) => {
     const hours = Math.floor(seconds / 3600);
