@@ -107,9 +107,9 @@ const challenges: Challenge[] = [
   {
     id: 10,
     title: "WEB FORENSICS",
-    description: "",
-    points: 150,
-    link: "",
+    description: "A simple website holds a secret message. Can you find the hidden flag?",
+    points: 50,
+    link: "https://learnbydoing.vercel.app/",
     timeLimit: 90,
     flag: challengeFlags.Web
   },
