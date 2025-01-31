@@ -17,50 +17,78 @@ interface Challenge {
 const challenges: Challenge[] = [
   {
     id: 1,
-    title: "Web Exploitation 101",
-    description: "Find the hidden flag in the website's source code",
-    points: 100,
-    link: "http://titan.picoctf.net:59972/",
+    title: "File Recovery Challenge",
+    description: "We've received a file from an unknown source that was supposed to depict an alien vessel that would've been used for a possible invasion. However, the file matches no known file type and the data doesn't make sense either, leading us to believe it has been corrupted, possibly intentionally. See if you can manage to repair the corruption that has occurred and restore the file's contents, which would give us the upper hand in knowing what to expect in an invasion.",
+    points: 50,
+    link: "/ctf/firstctf.unknown",
     timeLimit: 30,
-    flag: challengeFlags.web_exploitation
-  },
-  {
-    id: 2,
-    title: "Cryptography Challenge",
-    description: "Decrypt the message to find the flag",
-    points: 150,
-    link: "https://challenge2.example.com",
-    timeLimit: 45,
-    flag: challengeFlags.cryptography
-  },
-  {
-    id: 3,
-    title: "Binary Exploitation",
-    description: "Exploit the binary to get the flag",
-    points: 200,
-    link: "https://challenge3.example.com",
-    timeLimit: 60,
-    flag: challengeFlags.binary
-  },
-  {
-    id: 4,
-    title: "Forensics Investigation",
-    description: "Analyze the packet capture to find the flag",
-    points: 175,
-    link: "https://challenge4.example.com",
-    timeLimit: 45,
     flag: challengeFlags.forensics
   },
   {
-    id: 5,
-    title: "Reverse Engineering",
-    description: "Reverse engineer the application to find the flag",
+    id: 2,
+    title: "Steganography Challenge",
+    description: "In the heart of the festive season, a cryptic invitation arrived for the annual Christmas party, featuring a seemingly ordinary picture concealing a hidden file. As guests gathered, excitement grew, turning the party into a digital treasure hunt with laptops and decoding tools, until one savvy guest uncovered the secret—a virtual advent calendar filled with personalized messages, festive images, and holiday cheer, celebrating both the victory in the steganography challenge and the magic of Christmas.",
+    points: 150,
+    link: "/ctf/helloctf2.jpg",
+    timeLimit: 45,
+    flag: challengeFlags.forensics2
+  },
+  {
+    id: 3,
+    title: "Classic Cipher Decryption Challenge",
+    description: "Like Elliot’s old-school tools, this cipher’s from the past. It uses a fixed key and works in small, predictable chunks. It once ruled cryptography, but only the right key will reveal the truth.",
+    points: 100,
+    link: "/ctf/ctf7.jpg",
+    timeLimit: 60,
+    flag: challengeFlags.forensics3
+  },
+  {
+    id: 4,
+    title: "Audio Forensics Challenge",
+    description: "Reverse engineer the application to find the flag hidden within the audio file.",
     points: 250,
-    link: "https://challenge5.example.com",
+    link: "/ctf/morse-CSCTF_ITS_THE_KING_OF_JACK-20wpm-600hzctf5.wav",
     timeLimit: 90,
-    flag: challengeFlags.reverse_engineering
-  }
+    flag: challengeFlags.audio
+  },
+  {
+    id: 5,
+    title: "Metadata Analysis Challenge",
+    description: "In the world of deception, they leave no trace—unless you know where to look. Everything has a signature, even the most innocuous things, and sometimes the answer is hidden where they think you won’t check. It’s not in the picture you see, but in the story behind it, where beneath the surface lies a record—the hidden truth often ignored. Seek beyond the visible, and only then will the key be revealed.",
+    points: 250,
+    link: "ctf/hack_mectf8.jpg",
+    timeLimit: 90,
+    flag: challengeFlags.forensics4
+  },
+  {
+    id: 6,
+    title: "Pattern Recognition Challenge",
+    description: "A message flashes across your screen, almost lost in the noise: to uncover the truth, you must stop looking for the obvious. It’s not hidden in grand gestures but in the minutiae—small, almost imperceptible details the system hopes you’ll overlook, arranged with purpose, each piece fitting together not as you see it. Focus on the fine lines, the delicate contrasts, and what seems to be part of the background—only then will the picture become clear.",
+    points: 250,
+    link: "ctf/hack_mectf9.png",
+    timeLimit: 90,
+    flag: challengeFlags.forensics5
+  },
+  {
+    id: 7,
+    title: "Image Cryptanalysis Challenge",
+    description: "You receive an anonymous message with the subject line: 'The system has been compromised.' The cryptic message reads: 'The revolution is coming. To decode the truth, you'll need to decrypt the whispers left behind by those who seek to expose the system's lies. The key is hidden in plain sight, disguised as part of an image—an image that once held the truth, now guarded by cryptic symbols. But be warned, the path forward is not clear, and only the bravest will decipher its secrets.'",
+    points: 250,
+    link: "ctf/hack_mectf10.jpg",
+    timeLimit: 90,
+    flag: challengeFlags.forensics6
+  },
+  {
+    id: 8,
+    title: "Unknown File Format Challenge",
+    description: "A compressed archive contains an unknown file type. Can you determine its format and extract the flag?",
+    points: 250,
+    link: "ctf/ctf6.zip",
+    timeLimit: 90,
+    flag: challengeFlags.forensics7
+  },
 ];
+
 
 interface UserScore {
   username: string;
