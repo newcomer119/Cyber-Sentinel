@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Shield, Trophy, Brain, Lock } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import Leaderboard from '../components/Leaderboard';
+
 
 const slides = [
   {
@@ -137,7 +137,7 @@ export default function Home() {
         </div>
       </div>
 
-      <Leaderboard />
+      {/* <Leaderboard /> */}
     </div>
   );
 }
