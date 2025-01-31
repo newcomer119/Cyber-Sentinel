@@ -8,5 +8,5 @@ export const challengeFlags = {
   audio : "CSCTF{its_the_king_of_jack}",
   forensics7 : "CSCTF{Backup_Datacenter_Destroyed}",
   crypto : "CSCTF{P0larB33r}",
-  Web : "CSCTF{w3lcom3_t0_th3_j0urn3y}"
+  Web : "CSCTF{{3wlcom3_t0_th3_j0urn3y}}"
 }; 
