@@ -100,7 +100,7 @@ const challenges: Challenge[] = [
     title: "Crypto",
     description: "The Frostbitten Cipher The world’s top security agencies are in chaos. A rogue whistleblower, codenamed 'FrostByte,' has leaked classified intelligence hidden within a seemingly ordinary block of text. Encrypted messages disguised as innocent-looking snow-themed poetry are circulating on underground forums, but no one has been able to crack them—until now. You, an elite cyber-investigator, have intercepted one such message, but the encryption method is unlike anything you've seen before. Some words seem oddly spaced, as if the gaps between them hold a deeper meaning. A cryptic note left behind hints at an old-school technique—one that buries secrets in the whitespace itself. Your mission is to recover the hidden intelligence before rival hackers or government agencies do. Can you uncover FrostByte’s buried truth in the snow?",
     points: 50,
-    link: "ctf/chall1ctf9.text",
+    link: "ctf/chall1ctf.zip",
     timeLimit: 90,
     flag: challengeFlags.crypto
   },
