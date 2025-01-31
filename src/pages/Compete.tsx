@@ -109,9 +109,9 @@ const challenges: Challenge[] = [
     title: "WEB FORENSICS",
     description: "",
     points: 150,
-    link: "ctf/",
+    link: "",
     timeLimit: 90,
-    flag: challengeFlags.forensics7
+    flag: challengeFlags.Web
   },
 ];
 
