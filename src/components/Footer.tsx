@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
         </div>
         <div className="mt-8 pt-8 border-t border-gray-700 text-center text-gray-300">
           <p className="font-semibold">
-            &copy; {new Date().getFullYear()} Created By Mitarth. All rights
+            &copy; {new Date().getFullYear()} Created By CyberSentinel. All rights
             reserved.
           </p>
         </div>

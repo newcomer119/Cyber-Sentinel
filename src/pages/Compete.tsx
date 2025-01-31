@@ -13,6 +13,14 @@ interface Challenge {
   timeLimit: number; // in minutes
   flag: string;
 }
+const TOTAL_TIME = 3 * 60 * 60; // 3 hours in seconds
+const TIMER_KEY = 'ctf_timer_state';
+const TIMER_START_KEY = 'ctf_timer_start';
+
+interface TimerState {
+  isActive: boolean;
+  remainingTime: number;
+}
 
 const challenges: Challenge[] = [
   {
@@ -87,9 +95,200 @@ const challenges: Challenge[] = [
     timeLimit: 90,
     flag: challengeFlags.forensics7
   },
+  {
+    id: 9,
+    title: "Crypto",
+    description: "The Frostbitten Cipher The world’s top security agencies are in chaos. A rogue whistleblower, codenamed 'FrostByte,' has leaked classified intelligence hidden within a seemingly ordinary block of text. Encrypted messages disguised as innocent-looking snow-themed poetry are circulating on underground forums, but no one has been able to crack them—until now. You, an elite cyber-investigator, have intercepted one such message, but the encryption method is unlike anything you've seen before. Some words seem oddly spaced, as if the gaps between them hold a deeper meaning. A cryptic note left behind hints at an old-school technique—one that buries secrets in the whitespace itself. Your mission is to recover the hidden intelligence before rival hackers or government agencies do. Can you uncover FrostByte’s buried truth in the snow?",
+    points: 50,
+    link: "ctf/chall1ctf9.text",
+    timeLimit: 90,
+    flag: challengeFlags.crypto
+  },
+  {
+    id: 10,
+    title: "WEB FORENSICS",
+    description: "",
+    points: 150,
+    link: "ctf/",
+    timeLimit: 90,
+    flag: challengeFlags.forensics7
+  },
 ];
 
 
+// interface UserScore {
+//   username: string;
+//   points: number;
+//   solvedChallenges: number[];
+// }
+
+// export default function Compete() {
+//   const { user } = useUser();
+//   const [selectedChallenge, setSelectedChallenge] = useState<Challenge | null>(null);
+//   const [timeLeft, setTimeLeft] = useState<number>(0);
+//   const [flag, setFlag] = useState('');
+//   const [scores, setScores] = useState<UserScore[]>([
+//     { username: "player1", points: 150, solvedChallenges: [1] },
+//     { username: "player2", points: 300, solvedChallenges: [1, 2] },
+//     // Add more mock data as needed
+//   ]);
+  
+//   // Mock current user - In real app, this would come from auth context
+//   const [currentUser, setCurrentUser] = useState<UserScore>({
+//     username: user?.username || user?.firstName || user?.emailAddresses[0].emailAddress || "Anonymous",
+//     points: 0,
+//     solvedChallenges: []
+//   });
+
+//   const { updateUserScore } = useLeaderboard();
+
+//   useEffect(() => {
+//     if (user) {
+//       setCurrentUser(prev => ({
+//         ...prev,
+//         username: user.username || user.firstName || user.emailAddresses[0].emailAddress || "Anonymous"
+//       }));
+//     }
+//   }, [user]);
+
+//   useEffect(() => {
+//     let timer: NodeJS.Timeout;
+//     if (selectedChallenge && timeLeft > 0) {
+//       timer = setInterval(() => {
+//         setTimeLeft(prev => prev - 1);
+//       }, 1000);
+//     }
+//     return () => clearInterval(timer);
+//   }, [selectedChallenge, timeLeft]);
+
+//   const startChallenge = (challenge: Challenge) => {
+//     setSelectedChallenge(challenge);
+//     setTimeLeft(challenge.timeLimit * 60);
+//     setFlag('');
+//   };
+
+//   const formatTime = (seconds: number) => {
+//     const minutes = Math.floor(seconds / 60);
+//     const remainingSeconds = seconds % 60;
+//     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+//   };
+
+//   const handleSubmit = (e: React.FormEvent) => {
+//     e.preventDefault();
+//     if (selectedChallenge && flag === selectedChallenge.flag) {
+//       // Update current user's score
+//       if (!currentUser.solvedChallenges.includes(selectedChallenge.id)) {
+//         const updatedUser = {
+//           ...currentUser,
+//           points: currentUser.points + selectedChallenge.points,
+//           solvedChallenges: [...currentUser.solvedChallenges, selectedChallenge.id]
+//         };
+//         setCurrentUser(updatedUser);
+//         updateUserScore(updatedUser.username, updatedUser.points, updatedUser.solvedChallenges);
+        
+//         // Update scoreboard
+//         setScores(prev => {
+//           const filtered = prev.filter(s => s.username !== currentUser.username);
+//           return [...filtered, updatedUser].sort((a, b) => b.points - a.points);
+//         });
+//       }
+//       alert('Congratulations! Challenge completed successfully!');
+//       // Clear the current challenge and flag
+//       setSelectedChallenge(null);
+//       setFlag('');
+//       setTimeLeft(0);
+//     } else {
+//       alert('Incorrect flag. Try again!');
+//     }
+//   };
+
+//   return (
+//     <div className="max-w-7xl mx-auto px-4 py-12">
+//       <h1 className="text-3xl font-bold text-cyber-black mb-6">CTF Challenges </h1>
+
+//       <ScoreCard scores={scores} currentUser={currentUser} />
+
+//       <div className="grid md:grid-cols-2 gap-8">
+//         <div className="space-y-4">
+//           <h2 className="text-xl font-semibold text-cyber-black">Available Challenges</h2>
+//           {challenges.map(challenge => (
+//             <div
+//               key={challenge.id}
+//               className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border-l-4 border-cyber-red"
+//             >
+//               <h3 className="text-lg font-semibold text-cyber-black mb-2">{challenge.title}</h3>
+//               <p className="text-gray-600 mb-3">{challenge.description}</p>
+//               <div className="flex justify-between items-center">
+//                 <span className="text-cyber-blue font-medium">{challenge.points} points</span>
+//                 <button
+//                   onClick={() => startChallenge(challenge)}
+//                   className="bg-cyber-red text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
+//                 >
+//                   Start Challenge
+//                 </button>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+
+//         <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-cyber-blue">
+//           <h2 className="text-xl font-semibold text-cyber-black mb-4">Challenge Details</h2>
+//           {selectedChallenge ? (
+//             <div>
+//               <h3 className="text-lg font-semibold mb-2">{selectedChallenge.title}</h3>
+//               {currentUser.solvedChallenges.includes(selectedChallenge.id) ? (
+//                 <div className="mb-4 text-green-600 font-medium">
+//                   ✓ You have already completed this challenge
+//                 </div>
+//               ) : (
+//                 <>
+//                   <p className="text-gray-600 mb-4">{selectedChallenge.description}</p>
+//                   <div className="mb-4">
+//                     <span className="font-medium">Time Remaining: </span>
+//                     <span className="text-cyber-red">{formatTime(timeLeft)}</span>
+//                   </div>
+//                   <div className="mb-4">
+//                     <a
+//                       href={selectedChallenge.link}
+//                       target="_blank"
+//                       rel="noopener noreferrer"
+//                       className="text-cyber-blue hover:text-blue-700"
+//                     >
+//                       Open Challenge
+//                     </a>
+//                   </div>
+//                   <form onSubmit={handleSubmit} className="space-y-4">
+//                     <div>
+//                       <label htmlFor="flag" className="block text-sm font-medium text-gray-700">
+//                         Submit Flag
+//                       </label>
+//                       <input
+//                         type="text"
+//                         id="flag"
+//                         value={flag}
+//                         onChange={(e) => setFlag(e.target.value)}
+//                         placeholder="cybersentinel{flag_here}"
+//                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-cyber-blue focus:ring-cyber-blue"
+//                       />
+//                     </div>
+//                     <button
+//                       type="submit"
+//                       className="w-full bg-cyber-red text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
+//                     >
+//                       Submit Flag
+//                     </button>
+//                   </form>
+//                 </>
+//               )}
+//             </div>
+//           ) : (
+//             <p className="text-gray-600">Select a challenge to begin</p>
+//           )}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
 interface UserScore {
   username: string;
   points: number;
@@ -99,15 +298,33 @@ interface UserScore {
 export default function Compete() {
   const { user } = useUser();
   const [selectedChallenge, setSelectedChallenge] = useState<Challenge | null>(null);
-  const [timeLeft, setTimeLeft] = useState<number>(0);
   const [flag, setFlag] = useState('');
+  const [timerState, setTimerState] = useState<TimerState>(() => {
+    const savedState = localStorage.getItem(TIMER_KEY);
+    if (savedState) {
+      const parsed = JSON.parse(savedState);
+      const startTime = localStorage.getItem(TIMER_START_KEY);
+      if (startTime && parsed.isActive) {
+        const elapsedSeconds = Math.floor((Date.now() - parseInt(startTime)) / 1000);
+        const remainingTime = Math.max(TOTAL_TIME - elapsedSeconds, 0);
+        return {
+          isActive: remainingTime > 0,
+          remainingTime: remainingTime
+        };
+      }
+      return parsed;
+    }
+    return {
+      isActive: false,
+      remainingTime: TOTAL_TIME
+    };
+  });
+
   const [scores, setScores] = useState<UserScore[]>([
     { username: "player1", points: 150, solvedChallenges: [1] },
     { username: "player2", points: 300, solvedChallenges: [1, 2] },
-    // Add more mock data as needed
   ]);
   
-  // Mock current user - In real app, this would come from auth context
   const [currentUser, setCurrentUser] = useState<UserScore>({
     username: user?.username || user?.firstName || user?.emailAddresses[0].emailAddress || "Anonymous",
     points: 0,
@@ -127,30 +344,51 @@ export default function Compete() {
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (selectedChallenge && timeLeft > 0) {
+    if (timerState.isActive && timerState.remainingTime > 0) {
       timer = setInterval(() => {
-        setTimeLeft(prev => prev - 1);
+        setTimerState(prev => {
+          const newState = {
+            ...prev,
+            remainingTime: prev.remainingTime - 1,
+            isActive: prev.remainingTime - 1 > 0
+          };
+          localStorage.setItem(TIMER_KEY, JSON.stringify(newState));
+          return newState;
+        });
       }, 1000);
     }
     return () => clearInterval(timer);
-  }, [selectedChallenge, timeLeft]);
+  }, [timerState.isActive]);
+
+  const formatTime = (seconds: number) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = seconds % 60;
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+  };
 
   const startChallenge = (challenge: Challenge) => {
     setSelectedChallenge(challenge);
-    setTimeLeft(challenge.timeLimit * 60);
+    if (!timerState.isActive) {
+      const newState = {
+        isActive: true,
+        remainingTime: TOTAL_TIME
+      };
+      setTimerState(newState);
+      localStorage.setItem(TIMER_KEY, JSON.stringify(newState));
+      localStorage.setItem(TIMER_START_KEY, Date.now().toString());
+    }
     setFlag('');
-  };
-
-  const formatTime = (seconds: number) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (timerState.remainingTime <= 0) {
+      alert('Time is up! You can no longer submit flags.');
+      return;
+    }
+    
     if (selectedChallenge && flag === selectedChallenge.flag) {
-      // Update current user's score
       if (!currentUser.solvedChallenges.includes(selectedChallenge.id)) {
         const updatedUser = {
           ...currentUser,
@@ -160,17 +398,14 @@ export default function Compete() {
         setCurrentUser(updatedUser);
         updateUserScore(updatedUser.username, updatedUser.points, updatedUser.solvedChallenges);
         
-        // Update scoreboard
         setScores(prev => {
           const filtered = prev.filter(s => s.username !== currentUser.username);
           return [...filtered, updatedUser].sort((a, b) => b.points - a.points);
         });
       }
       alert('Congratulations! Challenge completed successfully!');
-      // Clear the current challenge and flag
       setSelectedChallenge(null);
       setFlag('');
-      setTimeLeft(0);
     } else {
       alert('Incorrect flag. Try again!');
     }
@@ -178,7 +413,20 @@ export default function Compete() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
-      <h1 className="text-3xl font-bold text-cyber-black mb-6">CTF Challenges </h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold text-cyber-black">CTF Challenges</h1>
+        <div className="text-xl font-semibold text-cyber-red">
+          {timerState.isActive ? (
+            timerState.remainingTime > 0 ? (
+              `Time Remaining: ${formatTime(timerState.remainingTime)}`
+            ) : (
+              'Time is up!'
+            )
+          ) : (
+            'Timer will start with first challenge'
+          )}
+        </div>
+      </div>
 
       <ScoreCard scores={scores} currentUser={currentUser} />
 
@@ -196,7 +444,12 @@ export default function Compete() {
                 <span className="text-cyber-blue font-medium">{challenge.points} points</span>
                 <button
                   onClick={() => startChallenge(challenge)}
-                  className="bg-cyber-red text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
+                  disabled={timerState.remainingTime <= 0}
+                  className={`${
+                    timerState.remainingTime <= 0 
+                      ? 'bg-gray-400 cursor-not-allowed' 
+                      : 'bg-cyber-red hover:bg-red-700'
+                  } text-white px-4 py-2 rounded transition-colors`}
                 >
                   Start Challenge
                 </button>
@@ -217,10 +470,6 @@ export default function Compete() {
               ) : (
                 <>
                   <p className="text-gray-600 mb-4">{selectedChallenge.description}</p>
-                  <div className="mb-4">
-                    <span className="font-medium">Time Remaining: </span>
-                    <span className="text-cyber-red">{formatTime(timeLeft)}</span>
-                  </div>
                   <div className="mb-4">
                     <a
                       href={selectedChallenge.link}
@@ -243,11 +492,17 @@ export default function Compete() {
                         onChange={(e) => setFlag(e.target.value)}
                         placeholder="cybersentinel{flag_here}"
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-cyber-blue focus:ring-cyber-blue"
+                        disabled={timerState.remainingTime <= 0}
                       />
                     </div>
                     <button
                       type="submit"
-                      className="w-full bg-cyber-red text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
+                      disabled={timerState.remainingTime <= 0}
+                      className={`w-full ${
+                        timerState.remainingTime <= 0 
+                          ? 'bg-gray-400 cursor-not-allowed' 
+                          : 'bg-cyber-red hover:bg-red-700'
+                      } text-white px-4 py-2 rounded transition-colors`}
                     >
                       Submit Flag
                     </button>
