@@ -113,7 +113,7 @@ const challenges: Challenge[] = [
     points: 50,
     link: "https://learnbydoing.vercel.app/",
     timeLimit: 90,
-    flag: challengeFlags.Web
+    flag: challengeFlags.web
   },
 ];
 
