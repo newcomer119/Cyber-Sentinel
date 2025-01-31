@@ -45,15 +45,6 @@ const challenges: Challenge[] = [
   },
   {
     id: 3,
-    title: "Classic Cipher Decryption Challenge",
-    description: "Like Elliot’s old-school tools, this cipher’s from the past. It operates in fixed cycles, shifting predictably through its sequence. A decade(10 years) ago, it might have been secure, but only the right key will reveal the truth.",
-    points: 100,
-    link: "/ctf/ctf7.jpg",
-    timeLimit: 60,
-    flag: challengeFlags.forensics3
-  },
-  {
-    id: 4,
     title: "Audio Forensics Challenge",
     description: "Reverse engineer the application to find the flag hidden within the audio file.",
     points: 250,
@@ -62,7 +53,7 @@ const challenges: Challenge[] = [
     flag: challengeFlags.audio
   },
   {
-    id: 5,
+    id: 4,
     title: "Metadata Analysis Challenge",
     description: "In the world of deception, they leave no trace—unless you know where to look. Everything has a signature, even the most innocuous things, and sometimes the answer is hidden where they think you won’t check. It’s not in the picture you see, but in the story behind it, where beneath the surface lies a record—the hidden truth often ignored. Seek beyond the visible, and only then will the key be revealed.",
     points: 250,
@@ -71,7 +62,7 @@ const challenges: Challenge[] = [
     flag: challengeFlags.forensics4
   },
   {
-    id: 6,
+    id: 5,
     title: "Pattern Recognition Challenge",
     description: "A message flashes across your screen, almost lost in the noise: to uncover the truth, you must stop looking for the obvious. It’s not hidden in grand gestures but in the minutiae—small, almost imperceptible details the system hopes you’ll overlook, arranged with purpose, each piece fitting together not as you see it. Focus on the fine lines, the delicate contrasts, and what seems to be part of the background—only then will the picture become clear.",
     points: 250,
@@ -80,7 +71,7 @@ const challenges: Challenge[] = [
     flag: challengeFlags.forensics5
   },
   {
-    id: 7,
+    id: 6,
     title: "Image Cryptanalysis Challenge",
     description: "You receive an anonymous message with the subject line: 'The system has been compromised.' The cryptic message reads: 'The revolution is coming. To decode the truth, you'll need to decrypt the whispers left behind by those who seek to expose the system's lies. The key is hidden in plain sight, disguised as part of an image—an image that once held the truth, now guarded by cryptic symbols. But be warned, the path forward is not clear, and only the bravest will decipher its secrets.'",
     points: 250,
@@ -89,7 +80,7 @@ const challenges: Challenge[] = [
     flag: challengeFlags.forensics6
   },
   {
-    id: 8,
+    id: 7,
     title: "Unknown File Format Challenge",
     description: "A compressed archive contains an unknown file type. Can you determine its format and extract the flag?",
     points: 250,
@@ -98,7 +89,7 @@ const challenges: Challenge[] = [
     flag: challengeFlags.forensics7
   },
   {
-    id: 9,
+    id: 8,
     title: "Crypto",
     description: "The Frostbitten Cipher The world’s top security agencies are in chaos. A rogue whistleblower, codenamed 'FrostByte,' has leaked classified intelligence hidden within a seemingly ordinary block of text. Encrypted messages disguised as innocent-looking snow-themed poetry are circulating on underground forums, but no one has been able to crack them—until now. You, an elite cyber-investigator, have intercepted one such message, but the encryption method is unlike anything you've seen before. Some words seem oddly spaced, as if the gaps between them hold a deeper meaning. A cryptic note left behind hints at an old-school technique—one that buries secrets in the whitespace itself. Your mission is to recover the hidden intelligence before rival hackers or government agencies do. Can you uncover FrostByte’s buried truth in the snow?",
     points: 50,
@@ -107,7 +98,7 @@ const challenges: Challenge[] = [
     flag: challengeFlags.crypto
   },
   {
-    id: 10,
+    id: 9,
     title: "WEB FORENSICS",
     description: "A simple website holds a secret message. Can you find the hidden flag?",
     points: 50,
