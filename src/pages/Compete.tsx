@@ -46,7 +46,7 @@ const challenges: Challenge[] = [
   {
     id: 3,
     title: "Classic Cipher Decryption Challenge",
-    description: "Like Elliot’s old-school tools, this cipher’s from the past. It uses a fixed key and works in small, predictable chunks. It once ruled cryptography, but only the right key will reveal the truth.",
+    description: "Like Elliot’s old-school tools, this cipher’s from the past. It operates in fixed cycles, shifting predictably through its sequence. A decade(10 years) ago, it might have been secure, but only the right key will reveal the truth.",
     points: 100,
     link: "/ctf/ctf7.jpg",
     timeLimit: 60,
