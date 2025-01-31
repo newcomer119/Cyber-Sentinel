@@ -41,19 +41,22 @@ const Footer: React.FC = () => {
             <ul className="space-y-2">
               <li>
                 <a href="https://www.instagram.com/cybersentinelupes?igsh=MTdqeHpvMmQ4ajc2Zg==" 
-                   className="text-gray-300 hover:text-white flex items-center gap-2">
+                   className="text-gray-300 hover:text-white flex items-center gap-2"
+                   target="_blank">
                   <Instagram size={20} />
                   Instagram
                 </a>
               </li>
               <li>
-                <a href="https://github.com/CyberSentinel-UPES" className="text-gray-300 hover:text-white flex items-center gap-2">
+                <a href="https://github.com/CyberSentinel-UPES" className="text-gray-300 hover:text-white flex items-center gap-2"
+                  target="_blank">
                     <Github size={20} />
                   GitHub
                 </a>
               </li>
               <li>
-                <a href="" className="text-gray-300 hover:text-white flex items-center gap-2">
+                <a href="" className="text-gray-300 hover:text-white flex items-center gap-2 "
+                target="_blank">
                     <Linkedin size={20} />
                   LinkedIn
                 </a>
